@@ -1,0 +1,93 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\papai\\OneDrive\\Dokumente\\School\\Inf\\4AHINF\\LinkSammlungWebApp\\LinkSammlungWebApp\\LinkSammlungWebApp.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\papai\\OneDrive\\Dokumente\\School\\Inf\\4AHINF\\LinkSammlungWebApp\\LinkSammlungWebApp\\LinkSammlungWebApp.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\papai\\OneDrive\\Dokumente\\School\\Inf\\4AHINF\\LinkSammlungWebApp\\LinkSammlungWebApp\\LinkSammlungWebApp.csproj",
+        "projectName": "LinkSammlungWebApp",
+        "projectPath": "C:\\Users\\papai\\OneDrive\\Dokumente\\School\\Inf\\4AHINF\\LinkSammlungWebApp\\LinkSammlungWebApp\\LinkSammlungWebApp.csproj",
+        "packagesPath": "C:\\Users\\papai\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\papai\\OneDrive\\Dokumente\\School\\Inf\\4AHINF\\LinkSammlungWebApp\\LinkSammlungWebApp\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\papai\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Components.WebAssembly": {
+              "target": "Package",
+              "version": "[6.0.11, )"
+            },
+            "Microsoft.AspNetCore.Components.WebAssembly.DevServer": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.11, )"
+            },
+            "Microsoft.AspNetCore.Cors": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Syncfusion.Blazor": {
+              "target": "Package",
+              "version": "[21.2.5, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.NETCore.App.Runtime.Mono.browser-wasm",
+              "version": "[6.0.13, 6.0.13]"
+            }
+          ],
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+        }
+      },
+      "runtimes": {
+        "browser-wasm": {
+          "#import": []
+        }
+      }
+    }
+  }
+}

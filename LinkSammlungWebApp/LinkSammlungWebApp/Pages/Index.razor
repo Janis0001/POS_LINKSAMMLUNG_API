@@ -1,0 +1,86 @@
+﻿@page "/"
+@using LinkSammlungWebApp.Data
+@using System.Net.Http
+@inject HttpClient http
+@using System.Text.Json;
+@using Microsoft.JSInterop;
+@using System.Text;
+@using System.Diagnostics;
+
+    <h3 class="p-3 text-center">Blazor WebAssembly - Display a list of items</h3>
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>URL</th>
+                <th>Erstellung</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (links != null)
+            {
+                @foreach (Linksammlung link in links)
+                {
+                    Console.WriteLine("Inside the loop");
+                    <tr>
+                        <td>@link.linkName</td>
+                        <td>@link.linkURL</td>
+                        <td>@link.erstellung</td>
+                    </tr>
+                        <button @onclick="@(() => DeleteLink(link))" runat='server'>Delete</button>
+                        <button @onclick="@(() => editLink(link))" runat='server'>Edit</button>
+                }
+            }
+        </tbody>
+    </table>
+
+@code {
+    List<Linksammlung> links = new List<Linksammlung>();
+    Linksammlung linkHelp = new Linksammlung();
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            string data = await http.GetStringAsync("http://localhost:3002/Link");
+            links = JsonSerializer.Deserialize<List<Linksammlung>>(data);
+        }
+        catch
+        {
+
+        }
+    }
+
+    public async void DeleteLink(Linksammlung link)
+    {
+        try
+        {
+            string data = await http.GetStringAsync("http://localhost:3002/Link");
+            var list = JsonSerializer.Deserialize<List<Linksammlung>>(data);
+
+
+            if (link != null && list != null)
+            {
+                var response = http.DeleteAsync("http://localhost:3002/deleteLink/" + link.id);
+                links.Remove(link);
+            }
+        }
+        catch
+        {
+
+        }
+    }
+
+    public async void editLink(Linksammlung link)
+    {
+        string data = await http.GetStringAsync("http://localhost:3002/Link");
+        var list = JsonSerializer.Deserialize<List<Linksammlung>>(data);
+
+        if (link != null && list != null)
+        {
+            var noteJson = JsonSerializer.Serialize(link);
+            var requestContent = new StringContent(noteJson, Encoding.UTF8, "application/json");
+            var response = http.PutAsync("http://localhost:3002/editLink/" + link.id, requestContent);
+        }
+    }
+}
