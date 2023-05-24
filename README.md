@@ -1,4 +1,4 @@
-
+# Linksammlung API
 Dies ist das Semesterprojekt von Janis Papai für den Unterrichtsgegenstand Programmieren und Softwareentwicklung. In diesem Projekt geht es um das Thema REST API's. Eine Anforderung der Lehrpersonen es 2 Clients zu erstellen (in unserem Fall handelt es sich hierbei um eine Website und eine WPF-Anwendung) welche auf die API zugreifen können.
 
 Eines von den Lehrern zur Verfügung gestellten Themen war eine Linksammlung. Für dieses Thema habe ich mich entschieden. Ich nahm mir als Ziel eine einfach zu bedienende Anwendung zur Verfügung zu stellen, welche die Daten, die man eingibt, danach auf der Website anzeigen lassen kann.
