@@ -179,27 +179,33 @@ Besonders herrausheben an meinem Code möchte ich die Möglichkeit die Informati
 Der Code zum Download ist wie folgt aufgebaut:
 
 ```js
-private async Task DownloadData()
-    {
-        if (links != null)
-        {
-            try
-            {
-                string jsonData = JsonSerializer.Serialize(links);
+StringBuilder sb = new StringBuilder();
 
-                byte[] dataBytes = Encoding.UTF8.GetBytes(jsonData);
+                //Überschriften der Datei
+                sb.AppendLine("Link Name\tLink URL\tErstellung");
 
+                //Reihen für die Tabelle in der Datei
+                foreach (var link in links)
+                {
+                    sb.AppendLine($"{link.linkName}\t\t{link.linkURL}\t{link.erstellung}");
+                }
+
+                string tableData = sb.ToString();
                 string fileName = $"data_{DateTime.Now:yyyyMMddHHmmss}.txt";
 
-                await JSRuntime.InvokeVoidAsync("downloadFile", fileName, dataBytes);
+                var element = await JSRuntime.InvokeAsync<IJSObjectReference>("eval", "document.createElement('a')");
+
+                // Set anchor attributes
+                await element.InvokeVoidAsync("setAttribute", "href", $"data:text/plain;charset=utf-8,{Uri.EscapeDataString(tableData)}");
+                await element.InvokeVoidAsync("setAttribute", "download", fileName);
+
+                //Download der Datei
+                await element.InvokeVoidAsync("click");
             }
-            catch
+            catch (Exception ex)
             {
-
+                Console.WriteLine($"An error occurred while downloading data: {ex.Message}");
             }
-        }
-
-    }
  ```
 
 Im Schritt 1 werden die links (in denen die Informationen gespeichert sind) in ein JSON Objekt umgewandelt.
@@ -363,4 +369,6 @@ Bei der Erarbeitung des Projektes kam es oftmals zu Hürden, welche die Fertigst
 Das größte Problem war die Erarbeitung der Website, da dies mein erstes Mal war, dass ich eine Website selbst konstruieren musste.
 Zuerst habe ich mich beim Erstellen der Website für React entschieden.
 Ich bin aber beim Erlernen von React schnell draufgekommen, dass mir hierfür die Zeit fehlt.
-Nachdem ich mit Blazor begonnen habe zu arbeiten, hatte ich keinerlei größere Probleme mehr und konnte ohne große Probleme meine Page erstellen. 
+Nachdem ich mit Blazor begonnen habe zu arbeiten, hatte ich keinerlei größere Probleme mehr und konnte ohne große Probleme meine Page erstellen.
+
+Eine auch sehr große und vorher nicht bedachte schwierigkeit war die Tatsache, dass ich 1 Woche vor der Präsentation ein Problem mit meinem Laptop hatte und aus diesem Grund auf einen neuen Umsteigen musste. Dies führte zu schwierigkeiten wie zum Beispiel das Downloaden aller Pakete um schlussendlich das Program so zu zeigen wie ich es eigentlich geplant hatte.
