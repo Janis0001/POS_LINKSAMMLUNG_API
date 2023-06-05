@@ -364,7 +364,7 @@ Diese Klasse ist schlussendlich ausschlaggebend für das wirkliche Downloaden de
 classDiagram
 
 LinkSammlungController "1" *-- "1" LinkSammlungService : has
-LinkSammlungServiceService "1" *-- "1" Repository: has
+LinkSammlungService "1" *-- "1" Repository: has
 LinkSammlungService "1" <-- "*" Link : has
 Repository <|.. MongoRepository : implements
 
