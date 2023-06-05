@@ -357,6 +357,50 @@ Diese Klasse ist schlussendlich ausschlaggebend für das wirkliche Downloaden de
 
 </details>
 
+
+## Diagramme
+
+```mermaid
+classDiagram
+
+LinkSammlungController "1" *-- "1" LinkSammlungService : has
+LinkSammlungServiceService "1" *-- "1" Repository: has
+LinkSammlungService "1" <-- "*" Link : has
+Repository <|.. MongoRepository : implements
+
+class  LinkSammlungController{
+-service : Service
++Links()
++status()
++addLink()
++editLink()
++deleteLink()
+}
+
+class  LinkSammlungService{
+-repository : Repository
++Links()
++status()
++addLink(Link link)
++editLink(String id)
++deleteLink(String id)
+}
+
+class  Repository{
+<<interface>>
+}
+
+class  Link{
+-id : String
+-linkName : String
+-linkURL : String
+-erstellung : String
+}
+
+class MongoRepository {
+  
+}
+```
 ## Diskussion der Ergebnisse
 
 Das Programm wurde erfolgreich erstellt und entspricht den Anforderungen welche einerseits von den Lehrern und mir selbst vorgegeben wurden.
