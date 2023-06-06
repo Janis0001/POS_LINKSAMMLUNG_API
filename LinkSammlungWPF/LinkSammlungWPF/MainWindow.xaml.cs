@@ -49,8 +49,9 @@ namespace WpfApp1
 
         public void clickLink(object sender, RoutedEventArgs e)
         {
-            foreach(Link item in linkVar) {
-                if(item.linkName == LinkBoxList.SelectedItem.ToString())
+            foreach (Link item in linkVar)
+            {
+                if (item.linkName == LinkBoxList.SelectedItem.ToString())
                 {
                     Process.Start("explorer", item.linkURL);
                 }
@@ -112,21 +113,20 @@ namespace WpfApp1
                 Link link = linkVarFORID[help];
                 if (link != null && list != null)
                 {
-                        var response = client.DeleteAsync("http://localhost:3002/deleteLink/" + link.id);
-                        LinkBoxList.Items.Remove(LinkBoxList.SelectedItem);                  
+                    var response = client.DeleteAsync("http://localhost:3002/deleteLink/" + link.id);
+                    LinkBoxList.Items.Remove(LinkBoxList.SelectedItem);
                 }
             }
-            catch (Exception ex)
+            catch
             {
 
             }
         }
+
         private void ClearFieldButton_Click(object sender, RoutedEventArgs e)
         {
             NameTextBox.Text = "";
             UrlTextBox.Text = ""; 
-            LinkBoxList.Items.Clear(); 
-            AddLinkButton_Click(null, null);
         }
      
     }

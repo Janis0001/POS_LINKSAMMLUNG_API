@@ -23,7 +23,7 @@
             {
                 <tr>
                     <td>
-                        @if (!taged || linkHelp != link)
+                        @if (!taged)
                         {
                             @link.linkName
                         }
@@ -108,11 +108,8 @@
     {
         try{
              taged = true;
-
-             linkHelp = link;
              link.linkName = "";
              link.linkURL = "";
-             taged = true; 
         }
         catch
         {
