@@ -1,0 +1,72 @@
+﻿@page "/counter"
+@using LinkSammlungWebApp.Data
+@using System.Text.Json
+@using System.Net.Http
+@using System.Text
+@inject HttpClient http
+@inject IJSRuntime JSRuntime
+
+<h3>Download your data:</h3>
+
+@if (links == null)
+{
+    <a>Nothing to download yet!</a>
+}
+
+@if (links != null)
+{
+    <div class="text-center mt-3">
+        <a class="btn btn-primary" href="javascript:void(0);" @onclick="DownloadData">Download Data</a>
+    </div>
+}
+
+@code {
+    List<Linksammlung> links = new List<Linksammlung>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            string data = await http.GetStringAsync("http://localhost:3002/Link");
+            links = JsonSerializer.Deserialize<List<Linksammlung>>(data);
+        }
+        catch
+        {
+        }
+    }
+
+    private async Task DownloadData()
+    {
+        if (links != null)
+        {
+            try
+            {
+                StringBuilder sb = new StringBuilder();
+
+                //Überschriften der Datei
+                sb.AppendLine("Link Name\tLink URL\t\tErstellung");
+
+                //Reihen für die Tabelle in der Datei
+                foreach (var link in links)
+                {
+                    sb.AppendLine($"{link.linkName}\t\t{link.linkURL}\t{link.erstellung}");
+                }
+
+                string tableData = sb.ToString();
+                string fileName = $"data_{DateTime.Now:yyyyMMddHHmmss}.txt";
+
+                var element = await JSRuntime.InvokeAsync<IJSObjectReference>("eval", "document.createElement('a')");
+
+                await element.InvokeVoidAsync("setAttribute", "href", $"data:text/plain;charset=utf-8,{Uri.EscapeDataString(tableData)}");
+                await element.InvokeVoidAsync("setAttribute", "download", fileName);
+
+                //Download der Datei
+                await element.InvokeVoidAsync("click");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred while downloading data: {ex.Message}");
+            }
+        }
+    }
+}
